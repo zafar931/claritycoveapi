@@ -1,0 +1,39 @@
+{
+  "name": "issue-tracker-api",
+  "version": "1.0.0",
+  "description": "Issue Tracker API",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -e js,graphql -w . -w .env server.js",
+    "dev": "nodemon -e js,graphql server.js",
+    "serve": "node server.js",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vasansr/pro-mern-stack-2.git"
+  },
+  "author": "vasan.promern@gmail.com",
+  "license": "ISC",
+  "homepage": "https://github.com/vasansr/pro-mern-stack-2",
+  "dependencies": {
+    "apollo-server-express": "^2.25.3",
+    "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.17.1",
+    "google-auth-library": "^9.15.1",
+    "graphql": "^15.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
+    "mongodb": "^4.1.0",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
