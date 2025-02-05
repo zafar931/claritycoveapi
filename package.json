@@ -1,12 +1,12 @@
 {
-  "name": "issue-tracker-api",
+  "name": "clarity-cove-api",
   "version": "1.0.0",
-  "description": "Issue Tracker API",
+  "description": "Clarity Cove API",
   "main": "index.js",
   "engines": {
- "node": "10.x",
- "npm": "6.x"
- },
+    "node": "10.x",
+    "npm": "6.x"
+  },
   "scripts": {
     "start": "nodemon -e js,graphql -w . -w .env server.js",
     "dev": "nodemon -e js,graphql server.js",
@@ -16,13 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vasansr/pro-mern-stack-2.git"
+    "url": "git+https://github.com/zafar931/ClarityCoveapi"
   },
   "author": "vasan.promern@gmail.com",
   "license": "ISC",
-  "homepage": "https://github.com/vasansr/pro-mern-stack-2",
+  "homepage": "https://github.com/zafar931/ClarityCoveapi",
   "dependencies": {
     "apollo-server-express": "^2.25.3",
+    "axios": "^1.7.9",
     "body-parser": "^1.20.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -33,7 +34,8 @@
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "mongodb": "^4.1.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "eslint": "^5.12.0",

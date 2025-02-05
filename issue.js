@@ -31,7 +31,7 @@ async function list(_, {
     .skip(PAGE_SIZE * (page - 1))
     .limit(PAGE_SIZE);
 
-    const totalCount = await db.collection('issues').countDocuments(filter);
+  const totalCount = await db.collection('issues').countDocuments(filter);
   const issues = await cursor.toArray();
   const pages = Math.ceil(totalCount / PAGE_SIZE);
   return { issues, pages };
@@ -49,6 +49,8 @@ function validate(issue) {
     throw new UserInputError('Invalid input(s)', { errors });
   }
 }
+
+
 
 async function add(_, { issue }) {
   const db = getDb();
@@ -82,12 +84,14 @@ async function remove(_, { id }) {
   if (!issue) return false;
   issue.deleted = new Date();
 
-  let result = await db.collection('deleted_issues').insertOne(issue);
-  if (result.insertedId) {
-    result = await db.collection('issues').removeOne({ id });
-    return result.deletedCount === 1;
-  }
-  return false;
+  // Use upsert to update an existing document or insert if it doesn't exist
+  await db.collection('deleted_issues').updateOne(
+    { id },
+    { $set: issue },
+    { upsert: true }
+  );
+  const result = await db.collection('issues').deleteOne({ id });
+  return result.deletedCount === 1;
 }
 
 async function restore(_, { id }) {
@@ -98,7 +102,7 @@ async function restore(_, { id }) {
 
   let result = await db.collection('issues').insertOne(issue);
   if (result.insertedId) {
-    result = await db.collection('deleted_issues').removeOne({ id });
+    result = await db.collection('deleted_issues').deleteOne({ id });
     return result.deletedCount === 1;
   }
   return false;
@@ -128,7 +132,6 @@ async function counts(_, { status, effortMin, effortMax }) {
 
   const stats = {};
   results.forEach((result) => {
-    // eslint-disable-next-line no-underscore-dangle
     const { owner, status: statusKey } = result._id;
     if (!stats[owner]) stats[owner] = { owner };
     stats[owner][statusKey] = result.count;

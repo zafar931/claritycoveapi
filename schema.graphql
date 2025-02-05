@@ -83,14 +83,15 @@ type Query {
 }
 
 enum Direction {
-  PREV
-  NEXT
+  Prev
+  Next
 }
 
 type Mutation {
   issueRestore(id: Int!): Boolean!
   setAboutMessage(message: String!): String
   issueAdd(issue: IssueInputs!): Issue!
-  issueUpdate(id: Int!, changes: IssueUpdateInputs!, version: Int!): Issue!
+  issueUpdate(id: Int!, changes: IssueUpdateInputs!): Issue!
   issueDelete(id: Int!): Boolean!
 }
+
